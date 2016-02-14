@@ -4,4 +4,8 @@ This demo project demonstrates how to create cool lightning effect for your Spri
 
 Objective C version: https://github.com/andrew8712/SpriteKitLightning
 
+Please refer to http://andreygordeev.blogspot.com/2014/11/sprite-kit-lightning.html blog post for more info.
+
 You can play with settings, which are stored in LightningNode.swift file to achieve a better effect.
+
+The code is under IDC (I don't care) license, so go ahead and create something amazing with using this effect!
