@@ -13,7 +13,7 @@ var kLoadSharedAssetsOnceToken: dispatch_once_t = 0
 
 var sHalfCircle = SKTexture()
 var sLightningSegment = SKTexture()
-var sSoundActions = Array<SKAction>()
+var sSoundActions = [SKAction]()
 
 class LightningBoltNode: SKNode {
     
@@ -21,7 +21,7 @@ class LightningBoltNode: SKNode {
     var lineDrawDelay = 0.02
     var displaceCoefficient = 0.25
     var lineRangeCoefficient = 1.8
-    var pathArray = Array<CGPoint>()
+    var pathArray = [CGPoint]()
     
     init(startPoint: CGPoint, endPoint: CGPoint, lifetime: Double, lineDrawDelay: Double, displaceCoefficient: Double, lineRangeCoefficient: Double) {
         super.init()
@@ -35,7 +35,7 @@ class LightningBoltNode: SKNode {
     }
 
     required init(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)!
     }
     
     // MARK: Drawing bolt

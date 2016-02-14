@@ -11,7 +11,7 @@ import SpriteKit
 
 class LightningNode: SKSpriteNode {
     
-    var targetPoints = Array<CGPoint>();
+    var targetPoints = [CGPoint]();
     
     // Time between bolts (in seconds)
     let timeBetweenBolts = 0.15
@@ -28,25 +28,26 @@ class LightningNode: SKSpriteNode {
     // Make bigger if you want bigger line lenght and vice versa
     let lineRangeCoefficient = 1.8
     
+    // MARK: - Life cycle
+    
     init(size: CGSize) {
-        super.init()
+        super.init(texture: nil, color: UIColor.clearColor(), size: size)
         LightningBoltNode.loadSharedAssets()
         self.userInteractionEnabled = true
-        self.anchorPoint = CGPointZero
+        self.anchorPoint = CGPoint.zero
         self.size = size
     }
 
      required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        fatalError("init(coder:) has not been implemented")
     }
     
-    override init(texture: SKTexture!, color: UIColor!, size: CGSize) {
-        super.init(texture: texture, color: color, size: size)
-    }
+    // MARK: - Touches
     
-    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
-        let touch: UITouch = touches.anyObject() as UITouch
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        guard let touch = touches.first else {
+            return
+        }
         let locationInNode = touch.locationInNode(self)
         
         self.targetPoints.removeAll(keepCapacity: false)
@@ -54,15 +55,17 @@ class LightningNode: SKSpriteNode {
         self.startLightning()
     }
     
-    override func touchesMoved(touches: NSSet, withEvent event: UIEvent) {
-        let touch: UITouch = touches.anyObject() as UITouch
+    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        guard let touch = touches.first else {
+            return
+        }
         let locationInNode = touch.locationInNode(self)
         
         self.targetPoints.removeAll(keepCapacity: false)
         self.targetPoints.append(locationInNode)
     }
     
-    override func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.stopLightning()
     }
     
